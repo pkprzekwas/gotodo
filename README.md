@@ -7,7 +7,7 @@ docker run --name todo-postgres -e POSTGRES_PASSWORD=secret_pass -p 5432:5432 -d
 
 Connecting to database through psql:
 ```bash
-docker exec -it todo-postgres psql -h postgres -U postgres
+psql -h localhost -U postgres
 ```
 
 ### Project structure
