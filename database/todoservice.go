@@ -6,7 +6,7 @@ import (
 )
 
 type TodoService struct {
-	db *sqlx.DB
+	DB *sqlx.DB
 }
 
 func CreateTodoService(db *sqlx.DB) *TodoService {
@@ -16,7 +16,7 @@ func CreateTodoService(db *sqlx.DB) *TodoService {
 func (ts *TodoService) Todo(id int) (*todos.Todo, error) {
 	var todoList []todos.Todo
 	query := "SELECT * FROM todo WHERE id=$1"
-	err := ts.db.Select(&todoList, query, id)
+	err := ts.DB.Select(&todoList, query, id)
 	if err != nil {
 		return &todoList[0], err
 	}
@@ -26,7 +26,7 @@ func (ts *TodoService) Todo(id int) (*todos.Todo, error) {
 func (ts *TodoService) Todos() ([]todos.Todo, error) {
 	var todoList []todos.Todo
 	query := "SELECT * FROM todo"
-	err := ts.db.Select(&todoList, query)
+	err := ts.DB.Select(&todoList, query)
 	if err != nil {
 		return todoList, err
 	}
@@ -40,7 +40,7 @@ func (ts *TodoService) CreateTodo(title, description string) error {
 		IsDone:      false,
 	}
 
-	tx := ts.db.MustBegin()
+	tx := ts.DB.MustBegin()
 
 	query := "INSERT INTO todo (title, description, is_done) VALUES (:title, :description, :is_done)"
 	if _, err := tx.NamedExec(query, todo); err != nil {
@@ -51,7 +51,7 @@ func (ts *TodoService) CreateTodo(title, description string) error {
 }
 
 func (ts *TodoService) DeleteTodo(id int) error {
-	tx := ts.db.MustBegin()
+	tx := ts.DB.MustBegin()
 
 	query := "DELETE FROM todo WHERE id=$1"
 	_ = tx.MustExec(query, id)
