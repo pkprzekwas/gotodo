@@ -40,3 +40,8 @@ go run main.go get --id 3
 ```bash
 go run main.go delete --id 3
 ```
+
+### Todo:
+- reading from configuration file
+- hading task status
+- filtering by status
