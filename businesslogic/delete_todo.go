@@ -1,10 +1,12 @@
 package businesslogic
 
-import "github.com/pkprzekwas/gotodo/todos"
+import (
+	"fmt"
+	"github.com/pkprzekwas/gotodo/todos"
+)
 
-func DeleteTodo(todoService todos.TodoService, id int) error {
+func DeleteTodo(todoService todos.TodoService, id int) {
 	if err := todoService.DeleteTodo(id); err != nil {
-		return err
+		fmt.Println("Error while deleting ", id)
 	}
-	return nil
 }

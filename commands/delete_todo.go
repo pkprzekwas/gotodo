@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"fmt"
 	"github.com/pkprzekwas/gotodo/businesslogic"
 	"github.com/pkprzekwas/gotodo/todos"
 	"github.com/spf13/cobra"
@@ -25,9 +24,6 @@ var deleteCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var todoService todos.TodoService
 		todoService = getTodoService()
-
-		if err := businesslogic.DeleteTodo(todoService, id); err != nil {
-			fmt.Println(err)
-		}
+		businesslogic.DeleteTodo(todoService, id)
 	},
 }

@@ -1,12 +1,9 @@
 package commands
 
 import (
-	"fmt"
-
-	"github.com/spf13/cobra"
-
 	"github.com/pkprzekwas/gotodo/businesslogic"
 	"github.com/pkprzekwas/gotodo/todos"
+	"github.com/spf13/cobra"
 )
 
 var title, description string
@@ -17,6 +14,10 @@ func init() {
 		"title",
 		"",
 		"Title for a new Todo")
+	err := createCmd.MarkFlagRequired("title")
+	if err != nil {
+		panic(err)
+	}
 	createCmd.Flags().StringVar(
 		&description,
 		"description",
@@ -32,9 +33,6 @@ var createCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var todoService todos.TodoService
 		todoService = getTodoService()
-
-		if err := businesslogic.CreateTodo(todoService, title, description); err != nil {
-			fmt.Println(err)
-		}
+		businesslogic.CreateTodo(todoService, title, description)
 	},
 }

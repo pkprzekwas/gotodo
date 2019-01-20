@@ -9,8 +9,12 @@ import (
 func Initialize(todoService *database.TodoService) {
 	_ = database.CreateSchema(todoService.DB, todos.Schema)
 
+	populate(todoService)
+}
+
+func populate(todoService todos.TodoService) {
 	todoMap := map[string]string{
-		"Dinner":      "Dinner in my parent's house.",
+		"Example":     "This is an example of Todo description.",
 		"Bike repair": "Repairing wheel in the blue Trek bike.",
 		"Cleaning":    "Cleaning up by bedroom before Rachel's visit.",
 	}

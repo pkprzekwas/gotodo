@@ -2,26 +2,11 @@ package commands
 
 import (
 	"fmt"
-	"os"
-
-	"github.com/pkprzekwas/gotodo/database"
-
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"os"
 )
-
-var dbName = "postgres"
-var dbUser = "postgres"
-var dbPass = "secret_pass"
-
-func getTodoService() *database.TodoService {
-	db, err := database.DBConnect(dbName, dbUser, dbPass)
-	if err != nil {
-		panic(err)
-	}
-	return database.CreateTodoService(db)
-}
 
 var cfgFile string
 

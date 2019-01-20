@@ -1,10 +1,12 @@
 package businesslogic
 
-import "github.com/pkprzekwas/gotodo/todos"
+import (
+	"fmt"
+	"github.com/pkprzekwas/gotodo/todos"
+)
 
-func CreateTodo(todoService todos.TodoService, title, description string) error {
+func CreateTodo(todoService todos.TodoService, title, description string) {
 	if err := todoService.CreateTodo(title, description); err != nil {
-		return err
+		fmt.Println("Error while creating ", title)
 	}
-	return nil
 }
