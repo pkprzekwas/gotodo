@@ -1,9 +1,6 @@
 package todos
 
-import (
-	"fmt"
-	"github.com/jmoiron/sqlx"
-)
+import "fmt"
 
 var Schema = `
 CREATE TABLE todo (
@@ -37,8 +34,8 @@ func (t Todo) String() string {
 }
 
 type TodoService interface {
-	Todo(db *sqlx.DB, id int) (*Todo, error)
-	Todos(db *sqlx.DB) ([]*Todo, error)
-	CreateTodo(db *sqlx.DB, title, description string) error
-	DeleteTodo(db *sqlx.DB, id int) error
+	Todo(id int) (*Todo, error)
+	Todos() ([]Todo, error)
+	CreateTodo(title, description string) error
+	DeleteTodo(id int) error
 }

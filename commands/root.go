@@ -1,13 +1,27 @@
-package cmd
+package commands
 
 import (
 	"fmt"
 	"os"
 
-	homedir "github.com/mitchellh/go-homedir"
+	"github.com/pkprzekwas/gotodo/database"
+
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
+
+var dbName = "postgres"
+var dbUser = "postgres"
+var dbPass = "secret_pass"
+
+func getTodoService() *database.TodoService {
+	db, err := database.DBConnect(dbName, dbUser, dbPass)
+	if err != nil {
+		panic(err)
+	}
+	return database.CreateTodoService(db)
+}
 
 var cfgFile string
 
@@ -23,7 +37,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+	//	Run: func(commands *cobra.Command, args []string) { },
 }
 
 func Execute() {

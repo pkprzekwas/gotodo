@@ -13,14 +13,14 @@ func CreateTodoService(db *sqlx.DB) *TodoService {
 	return &TodoService{db}
 }
 
-func (ts *TodoService) Todo(id int) (todos.Todo, error) {
+func (ts *TodoService) Todo(id int) (*todos.Todo, error) {
 	var todoList []todos.Todo
 	query := "SELECT * FROM todo WHERE id=$1"
 	err := ts.db.Select(&todoList, query, id)
 	if err != nil {
-		return todoList[0], err
+		return &todoList[0], err
 	}
-	return todoList[0], nil
+	return &todoList[0], nil
 }
 
 func (ts *TodoService) Todos() ([]todos.Todo, error) {
@@ -58,4 +58,3 @@ func (ts *TodoService) DeleteTodo(id int) error {
 
 	return tx.Commit()
 }
-

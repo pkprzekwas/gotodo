@@ -1,4 +1,4 @@
-package cmd
+package commands
 
 import (
 	"fmt"
@@ -16,13 +16,10 @@ func init() {
 var testCmd = &cobra.Command{
 	Use:   "test",
 	Short: "Simple integration test.",
-	Long:  `Temporary simple integration test
+	Long: `Temporary simple integration test
 for the time of development.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO: Read config from config file and envs
-		dbName := "postgres"
-		dbUser := "postgres"
-		dbPass := "secret_pass"
 
 		db, err := database.DBConnect(dbName, dbUser, dbPass)
 		if err != nil {

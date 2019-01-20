@@ -1,7 +1,7 @@
 package main
 
-import "github.com/pkprzekwas/gotodo/cmd"
+import "github.com/pkprzekwas/gotodo/commands"
 
 func main() {
-	cmd.Execute()
+	commands.Execute()
 }
