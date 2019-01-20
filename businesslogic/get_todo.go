@@ -11,5 +11,6 @@ func GetTodo(todoService todos.TodoService, id int) *todos.Todo {
 		fmt.Println("Error getting todo: ", id)
 		fmt.Println(err)
 	}
+	fmt.Println(todo)
 	return todo
 }

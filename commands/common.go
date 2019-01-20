@@ -2,6 +2,8 @@ package commands
 
 import "github.com/pkprzekwas/gotodo/database"
 
+var id int
+
 var dbName = "postgres"
 var dbUser = "postgres"
 var dbPass = "secret_pass"

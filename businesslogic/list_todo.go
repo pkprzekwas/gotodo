@@ -12,8 +12,10 @@ func ListTodo(todoService todos.TodoService) []todos.Todo {
 		fmt.Println(err)
 	}
 
+	fmt.Println("ID\t| Title")
+	fmt.Println("________________________")
 	for _, todo := range todoList {
-		fmt.Println("___________________________", todo)
+		fmt.Println(todo.ID, "\t|", todo.Title)
 	}
 
 	return todoList

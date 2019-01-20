@@ -7,25 +7,25 @@ import (
 )
 
 func init() {
-	deleteCmd.Flags().IntVar(
+	getCmd.Flags().IntVar(
 		&id,
 		"id",
 		-1,
 		"Todo id")
-	err := deleteCmd.MarkFlagRequired("id")
+	err := getCmd.MarkFlagRequired("id")
 	if err != nil {
 		panic(err)
 	}
-	rootCmd.AddCommand(deleteCmd)
+	rootCmd.AddCommand(getCmd)
 }
 
-var deleteCmd = &cobra.Command{
-	Use:   "delete",
-	Short: "Delete todo item.",
-	Long:  `Delete todo item by providing id.`,
+var getCmd = &cobra.Command{
+	Use:   "get",
+	Short: "Get todo item.",
+	Long:  `Get todo item by providing id.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var todoService todos.TodoService
 		todoService = getTodoService()
-		businesslogic.DeleteTodo(todoService, id)
+		businesslogic.GetTodo(todoService, id)
 	},
 }
